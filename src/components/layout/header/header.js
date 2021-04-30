@@ -48,7 +48,7 @@ const Header = () => {
           )}
           {isAuthenticate() && (
             <Fragment>
-              <Link className="btn btn-outline-light my-2 mr-2 my-sm-0" onClick={()=>{removeAuthneticate()}} to="/login">Log Out</Link>
+              <Link className="btn btn-outline-light my-2 mr-2 my-sm-0"  to="/profile">PROFILE</Link>
             </Fragment>
           )}
         </form>

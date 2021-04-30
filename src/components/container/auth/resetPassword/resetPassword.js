@@ -1,13 +1,12 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ToastContainer,toast } from 'react-toastify';
 import Header from '../../../layout/header/header';
 
 
 const ResetPassword = () => {
-    const history =useHistory();
     const {register,handleSubmit,reset}=useForm();
     const {email}=useParams();
     console.log(email);

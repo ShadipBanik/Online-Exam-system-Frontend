@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
 import { isAuthenticate, setAuthneticate } from '../../../../middleware/authcheck';
+import { GoogleLogin } from 'react-google-login';
 import Header from '../../../layout/header/header';
 import './login.css';
 // const googleIcon=require()
@@ -81,7 +82,23 @@ const Login = () => {
           })
       }
    } 
-
+   const responseGoogle = (response) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/googleLogin`,{tokenId:response.tokenId}).then(res=>{
+        if (res.data.status === 200) {
+            setAuthneticate(res.data.access_token, res.data.user);
+            if (isAuthenticate()) {
+                history.push('/profile');
+                toast.success(res.data.message)
+            } else {
+                toast.error('Authenicate Failled!');
+            }
+        } else {
+            toast.error(res.data.message);
+        }
+    }).catch(err=>{
+        toast.error(err)
+    })
+  }
     return (
         <div>
             <Header />
@@ -129,11 +146,16 @@ const Login = () => {
                                         <hr align="" width="30%" style={{ display: "inline-block", marginBottom: "0.4rem" }} />
                                     </div>
                                     <div className="col-md-12 text-center m-3" >
-                                        <button style={{ paddinng: "10px", border: "2px solid #0062cc" }} type="button" className="btn btn-outline-primary">
-                                            <img src="../../../../assets/images/search.svg" alt="google" style={{ width: "18px", height: "18px", margin: "5px 17px 5px 0px " }} />
-                                            <p style={{ display: "initial", fontWeight: 500 }}>Sign In With Google</p>
-                                        </button>
+                                    <GoogleLogin
+                                    className="google-btn"
+                                    clientId="756799793321-o9bb12cq6mu9f2j88nn4591qmf8fsvf8.apps.googleusercontent.com"
+                                    buttonText="Sign In With Google"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'}
+                                    />
                                     </div>
+                              
                                 </div>
                             </div>
                             <div className="tab-pane fade show" id="forget" role="tabpanel" aria-labelledby="forget-tab">

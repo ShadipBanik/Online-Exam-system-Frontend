@@ -17,7 +17,7 @@ const Signup = () => {
     },[history]);
 
     const {register,handleSubmit,reset}=useForm();
-    const onSubmit=(data)=>{
+    const registration=(data)=>{
         data.roleId=1;
         data.status='pending';
         axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`,data).then(res=>{
@@ -57,7 +57,7 @@ const Signup = () => {
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <h3 className="register-heading">Apply as a Employee</h3>
                             <div className="row register-form m-auto">
-                                <form onSubmit={handleSubmit(onSubmit)}  style={{width:"100%"}}>
+                                <form onSubmit={handleSubmit(registration)}  style={{width:"100%"}}>
                                     <div className="col-md-12 col-sm-12" >
                                         <div className="row">
                                             <div className="col-md-6 col-sm-12">

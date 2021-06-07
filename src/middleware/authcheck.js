@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 
 export const setLocalstorage=(key,value)=>{
-   localStorage.setItem(key,value)
+   localStorage.setItem(key,JSON.stringify(value))
 }
 
 export const getLocalstorage=(key)=>{

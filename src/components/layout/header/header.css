@@ -1,3 +1,11 @@
 .navbar{
     background: linear-gradient(45deg, #3931af, #00c6ff)
 }
+.navbar-dark .navbar-toggler {
+    color: #ffffff !important;
+    border: 2px solid rgb(255 255 255 / 85%) !important;
+}
+
+.navbar-nav .nav-link{
+    color: white !important;
+}
